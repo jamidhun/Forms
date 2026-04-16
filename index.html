@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Form 121 Generator | Declaration u/s 197A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+/* ============================================================
+   DESIGN TOKENS -- DARK MODE (default)
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  --bg:            #020617;
+  --bg2:           #0f172a;
+  --bg3:           #1e293b;
+  --surface:       #0f172a;
+  --surface2:      #1e293b;
+  --surface3:      #263351;
+  --card-bg:       #131f35;
+  --card-border:   rgba(255,255,255,.07);
+  --primary:       #3b82f6;
+  --primary-dark:  #2563eb;
+  --primary-light: rgba(59,130,246,.15);
+  --primary-glow:  rgba(59,130,246,.22);
+  --success:       #10b981;
+  --success-light: rgba(16,185,129,.12);
+  --warning:       #f59e0b;
+  --warning-light: rgba(245,158,11,.12);
+  --error:         #ef4444;
+  --error-light:   rgba(239,68,68,.12);
+  --text1:         #f1f5f9;
+  --text2:         #cbd5e1;
+  --text3:         #94a3b8;
+  --text4:         #64748b;
+  --border:        rgba(255,255,255,.08);
+  --border2:       rgba(255,255,255,.12);
+  --input-bg:      #1a2744;
+  --input-border:  rgba(255,255,255,.14);
+  --input-text:    #f1f5f9;
+  --radius:        14px;
+  --radius-sm:     9px;
+  --radius-xs:     6px;
+  --shadow:        0 4px 24px rgba(0,0,0,.35);
+  --shadow-lg:     0 20px 60px rgba(0,0,0,.5);
+  --transition:    all .2s cubic-bezier(.4,0,.2,1);
+  --header-bg:     rgba(2,6,23,.9);
+  --header-border: rgba(255,255,255,.06);
+  --overlay:       rgba(0,0,0,.7);
+  --badge-bg:      rgba(59,130,246,.18);
+  --badge-color:   #93c5fd;
+  --icon-blue-bg:  rgba(59,130,246,.15);
+  --icon-blue-fg:  #60a5fa;
+  --icon-green-bg: rgba(16,185,129,.15);
+  --icon-green-fg: #34d399;
+  --icon-amber-bg: rgba(245,158,11,.15);
+  --icon-amber-fg: #fbbf24;
+  --icon-slate-bg: rgba(148,163,184,.1);
+  --icon-slate-fg: #94a3b8;
+  --calc-bg:       linear-gradient(135deg,rgba(59,130,246,.1) 0%,rgba(16,185,129,.07) 100%);
+  --calc-border:   rgba(59,130,246,.25);
+  --decl-border:   rgba(59,130,246,.3);
+  --decl-bg:       rgba(59,130,246,.06);
+  --section-tag-bg:    rgba(255,255,255,.04);
+  --section-tag-color: #94a3b8;
+  --section-tag-border:rgba(255,255,255,.08);
+  --step-idle-bg:  rgba(255,255,255,.06);
+  --step-idle-border: rgba(255,255,255,.14);
+  --step-idle-color:  #64748b;
+  --step-track-bg: rgba(255,255,255,.08);
+  --sticky-nav-bg: rgba(2,6,23,.97);
+  --sticky-nav-border: rgba(255,255,255,.08);
+  --review-label-color: #64748b;
+  --disclaimer-bg: linear-gradient(135deg,#78350f,#92400e);
+  --disclaimer-text: #fde68a;
+}
+
+[data-theme=“light”] {
+–bg:            #f0f4f8;
+–bg2:           #e8edf5;
+–bg3:           #dde4ef;
+–surface:       #ffffff;
+–surface2:      #f8fafc;
+–surface3:      #f1f5f9;
+–card-bg:       #ffffff;
+–card-border:   #e2e8f0;
+–primary:       #2563eb;
+–primary-dark:  #1d4ed8;
+–primary-light: #eff6ff;
+–primary-glow:  rgba(37,99,235,.18);
+–success:       #059669;
+–success-light: #ecfdf5;
+–warning:       #d97706;
+–warning-light: #fffbeb;
+–error:         #dc2626;
+–error-light:   #fef2f2;
+–text1:         #0f172a;
+–text2:         #1e293b;
+–text3:         #475569;
+–text4:         #94a3b8;
+–border:        #e2e8f0;
+–border2:       #cbd5e1;
+–input-bg:      #ffffff;
+–input-border:  #cbd5e1;
+–input-text:    #0f172a;
+–radius:        14px;
+–radius-sm:     9px;
+–radius-xs:     6px;
+–shadow:        0 4px 16px rgba(0,0,0,.08),0 1px 4px rgba(0,0,0,.04);
+–shadow-lg:     0 20px 60px rgba(0,0,0,.15),0 4px 16px rgba(0,0,0,.08);
+–transition:    all .2s cubic-bezier(.4,0,.2,1);
+–header-bg:     rgba(255,255,255,.95);
+–header-border: #e2e8f0;
+–overlay:       rgba(0,0,0,.5);
+–badge-bg:      #eff6ff;
+–badge-color:   #2563eb;
+–icon-blue-bg:  #eff6ff;
+–icon-blue-fg:  #2563eb;
+–icon-green-bg: #ecfdf5;
+–icon-green-fg: #059669;
+–icon-amber-bg: #fffbeb;
+–icon-amber-fg: #d97706;
+–icon-slate-bg: #f1f5f9;
+–icon-slate-fg: #475569;
+–calc-bg:       linear-gradient(135deg,#eff6ff,#f0fdf4);
+–calc-border:   #bfdbfe;
+–decl-border:   #2563eb;
+–decl-bg:       #f8fafc;
+–section-tag-bg:    #f8fafc;
+–section-tag-color: #475569;
+–section-tag-border:#e2e8f0;
+–step-idle-bg:  #ffffff;
+–step-idle-border: #cbd5e1;
+–step-idle-color:  #64748b;
+–step-track-bg: #e2e8f0;
+–sticky-nav-bg: rgba(255,255,255,.97);
+–sticky-nav-border: #e2e8f0;
+–review-label-color: #94a3b8;
+–disclaimer-bg: linear-gradient(135deg,#78350f,#92400e);
+–disclaimer-text: #fde68a;
+}
+
+/* ============================================================
+BASE RESET & BODY
+============================================================ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+
+body {
+font-family:‘Sora’,-apple-system,BlinkMacSystemFont,sans-serif;
+background: var(–bg);
+color: var(–text1);
+min-height: 100vh;
+font-size: 15px;
+line-height: 1.6;
+-webkit-font-smoothing: antialiased;
+transition: background .3s, color .3s;
+}
+
+/* Background glow – dark only */
+[data-theme=“dark”] body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background:
+radial-gradient(ellipse 70% 40% at 15% 10%, rgba(59,130,246,.1) 0%, transparent 55%),
+radial-gradient(ellipse 50% 35% at 85% 85%, rgba(16,185,129,.06) 0%, transparent 50%);
+pointer-events: none;
+z-index: 0;
+}
+
+/* ============================================================
+APP HEADER
+============================================================ */
+.app-header {
+background: var(–header-bg);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid var(–header-border);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.header-inner {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 13px 24px;
+gap: 10px;
+max-width: 940px;
+margin: 0 auto;
+}
+
+.header-brand {
+display: flex;
+align-items: center;
+gap: 10px;
+text-decoration: none;
+}
+
+.brand-icon {
+width: 34px;
+height: 34px;
+background: var(–primary);
+border-radius: 9px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+
+.brand-name {
+font-size: .92rem;
+font-weight: 700;
+color: var(–text1);
+letter-spacing: -.01em;
+line-height: 1.2;
+}
+
+.brand-sub {
+font-size: .62rem;
+color: var(–text4);
+font-weight: 400;
+letter-spacing: .04em;
+text-transform: uppercase;
+}
+
+.header-actions {
+display: flex;
+align-items: center;
+gap: 6px;
+flex-shrink: 0;
+}
+
+/* header buttons */
+.hbtn {
+display: inline-flex;
+align-items: center;
+gap: 5px;
+padding: 7px 11px;
+border-radius: var(–radius-xs);
+font-size: .75rem;
+font-weight: 500;
+font-family: ‘Sora’, sans-serif;
+cursor: pointer;
+border: 1px solid transparent;
+transition: var(–transition);
+white-space: nowrap;
+}
+
+.hbtn-ghost {
+background: var(–surface3);
+color: var(–text3);
+border-color: var(–border);
+}
+.hbtn-ghost:hover { color: var(–text1); border-color: var(–border2); }
+
+.hbtn-demo {
+background: var(–primary-light);
+color: var(–primary);
+border-color: var(–primary-glow);
+}
+.hbtn-demo:hover { opacity: .85; }
+
+/* Theme toggle button */
+.theme-toggle {
+width: 34px;
+height: 34px;
+border-radius: var(–radius-xs);
+border: 1px solid var(–border);
+background: var(–surface3);
+color: var(–text3);
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(–transition);
+flex-shrink: 0;
+}
+.theme-toggle:hover { color: var(–text1); border-color: var(–border2); }
+
+/* Language group */
+.lang-group {
+display: flex;
+background: var(–surface3);
+border: 1px solid var(–border);
+border-radius: var(–radius-xs);
+overflow: hidden;
+}
+.lang-btn {
+padding: 6px 9px;
+font-size: .7rem;
+font-weight: 600;
+font-family: ‘Sora’, sans-serif;
+cursor: pointer;
+border: none;
+background: transparent;
+color: var(–text4);
+transition: var(–transition);
+}
+.lang-btn.active { background: var(–primary); color: #fff; }
+
+@media (max-width: 576px) {
+.header-inner { padding: 10px 14px; }
+.brand-sub { display: none; }
+.hbtn span { display: none; }
+.hbtn { padding: 7px 9px; }
+.hbtn-demo span, .hbtn-ghost span { display: none; }
+}
+
+/* ============================================================
+DISCLAIMER BANNER
+============================================================ */
+.disclaimer-bar {
+background: var(–disclaimer-bg);
+padding: 9px 20px;
+display: flex;
+align-items: flex-start;
+gap: 8px;
+font-size: .75rem;
+color: var(–disclaimer-text);
+position: relative;
+z-index: 1;
+}
+.disclaimer-bar strong { color: #fcd34d; }
+
+/* ============================================================
+MAIN LAYOUT
+============================================================ */
+.app-body {
+position: relative;
+z-index: 1;
+padding: 28px 0 110px;
+}
+
+.form-container {
+max-width: 860px;
+margin: 0 auto;
+padding: 0 16px;
+}
+
+/* ============================================================
+STEPPER
+============================================================ */
+.stepper-wrap { margin-bottom: 28px; }
+
+.stepper {
+display: flex;
+align-items: flex-start;
+position: relative;
+}
+
+.stepper-track {
+position: absolute;
+top: 17px;
+left: calc(12.5% + 17px);
+right: calc(12.5% + 17px);
+height: 2px;
+background: var(–step-track-bg);
+z-index: 0;
+border-radius: 2px;
+}
+
+.stepper-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–primary) 0%, #60a5fa 100%);
+border-radius: 2px;
+transition: width .5s cubic-bezier(.4,0,.2,1);
+}
+
+.step-node {
+flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 6px;
+position: relative;
+z-index: 1;
+cursor: pointer;
+}
+
+.step-bubble {
+width: 34px;
+height: 34px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: .78rem;
+font-weight: 700;
+transition: var(–transition);
+border: 2px solid transparent;
+}
+
+.step-bubble.idle {
+background: var(–step-idle-bg);
+border-color: var(–step-idle-border);
+color: var(–step-idle-color);
+}
+
+.step-bubble.active {
+background: var(–primary);
+border-color: var(–primary);
+color: #fff;
+box-shadow: 0 0 0 4px var(–primary-glow);
+}
+
+.step-bubble.done {
+background: var(–success);
+border-color: var(–success);
+color: #fff;
+}
+
+.step-label {
+font-size: .66rem;
+font-weight: 500;
+text-align: center;
+line-height: 1.3;
+max-width: 66px;
+}
+.step-label.idle   { color: var(–text4); }
+.step-label.active { color: #60a5fa; }
+.step-label.done   { color: #34d399; }
+
+@media (max-width: 480px) {
+.step-label { font-size: .58rem; max-width: 50px; }
+.step-bubble { width: 28px; height: 28px; font-size: .7rem; }
+.stepper-track { top: 14px; }
+}
+
+/* ============================================================
+CARDS
+============================================================ */
+.form-card {
+background: var(–card-bg);
+border-radius: var(–radius);
+box-shadow: var(–shadow);
+margin-bottom: 16px;
+overflow: hidden;
+border: 1px solid var(–card-border);
+transition: background .3s, border-color .3s, box-shadow .3s;
+animation: cardIn .32s cubic-bezier(.4,0,.2,1) both;
+}
+
+@keyframes cardIn {
+from { opacity:0; transform:translateY(10px); }
+to   { opacity:1; transform:translateY(0); }
+}
+
+.card-header-strip {
+padding: 18px 22px 0;
+display: flex;
+align-items: flex-start;
+gap: 12px;
+margin-bottom: 16px;
+}
+
+.card-icon {
+width: 36px;
+height: 36px;
+border-radius: 9px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+}
+.card-icon.blue  { background: var(–icon-blue-bg);  color: var(–icon-blue-fg);  }
+.card-icon.green { background: var(–icon-green-bg); color: var(–icon-green-fg); }
+.card-icon.amber { background: var(–icon-amber-bg); color: var(–icon-amber-fg); }
+.card-icon.slate { background: var(–icon-slate-bg); color: var(–icon-slate-fg); }
+
+.card-title-block { flex: 1; }
+.card-title {
+font-size: .95rem;
+font-weight: 700;
+color: var(–text1);
+letter-spacing: -.01em;
+margin-bottom: 2px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.card-badge {
+font-size: .62rem;
+font-weight: 600;
+letter-spacing: .05em;
+text-transform: uppercase;
+padding: 2px 7px;
+border-radius: 20px;
+background: var(–badge-bg);
+color: var(–badge-color);
+}
+
+.card-desc { font-size: .78rem; color: var(–text3); line-height: 1.5; }
+
+.card-body { padding: 0 22px 22px; }
+
+.section-divider {
+height: 1px;
+background: var(–border);
+margin: 18px 0;
+}
+
+/* ============================================================
+FORM FIELDS
+============================================================ */
+.field-group { margin-bottom: 0; }
+
+.field-label {
+display: block;
+font-size: .78rem;
+font-weight: 600;
+color: var(–text2);
+margin-bottom: 6px;
+letter-spacing: .01em;
+}
+.field-label .req { color: var(–error); margin-left: 2px; }
+
+.field-hint { font-size: .7rem; color: var(–text4); margin-top: 4px; }
+
+.field-error {
+font-size: .7rem;
+color: var(–error);
+margin-top: 4px;
+display: none;
+align-items: center;
+gap: 4px;
+}
+.field-error.visible { display: flex; }
+
+/* Input / Select */
+.f-input,
+.f-select {
+display: block;
+width: 100%;
+height: 46px;
+padding: 0 14px;
+font-size: .88rem;
+font-family: ‘Sora’, sans-serif;
+font-weight: 400;
+color: var(–input-text);
+background: var(–input-bg);
+border: 1.5px solid var(–input-border);
+border-radius: var(–radius-sm);
+transition: var(–transition);
+outline: none;
+appearance: none;
+-webkit-appearance: none;
+}
+
+.f-input::placeholder { color: var(–text4); }
+.f-select option { background: var(–surface2); color: var(–text1); }
+
+.f-input:focus,
+.f-select:focus {
+border-color: var(–primary);
+box-shadow: 0 0 0 3px var(–primary-glow);
+background: var(–input-bg);
+}
+
+.f-input.has-error,
+.f-select.has-error {
+border-color: var(–error);
+background: var(–error-light);
+}
+
+/* Select arrow */
+.f-select-wrap { position: relative; }
+.f-select-wrap::after {
+content: ‘’;
+position: absolute;
+right: 14px;
+top: 50%;
+transform: translateY(-50%);
+width: 0;
+height: 0;
+border-left: 4px solid transparent;
+border-right: 4px solid transparent;
+border-top: 5px solid var(–text4);
+pointer-events: none;
+}
+.f-select { padding-right: 32px; cursor: pointer; }
+
+/* Addon wrap */
+.input-addon-wrap {
+display: flex;
+border: 1.5px solid var(–input-border);
+border-radius: var(–radius-sm);
+overflow: hidden;
+transition: var(–transition);
+}
+.input-addon-wrap:focus-within {
+border-color: var(–primary);
+box-shadow: 0 0 0 3px var(–primary-glow);
+}
+.input-addon-wrap.has-error { border-color: var(–error); }
+
+.input-addon {
+background: var(–surface3);
+border: none;
+border-right: 1.5px solid var(–input-border);
+padding: 0 12px;
+font-size: .8rem;
+font-family: ‘Sora’, sans-serif;
+color: var(–text3);
+white-space: nowrap;
+display: flex;
+align-items: center;
+}
+
+.input-addon-field {
+flex: 1;
+height: 44px;
+padding: 0 12px;
+border: none;
+font-size: .88rem;
+font-family: ‘Sora’, sans-serif;
+color: var(–input-text);
+background: var(–input-bg);
+outline: none;
+}
+.input-addon-field::placeholder { color: var(–text4); }
+
+/* Toggle buttons */
+.toggle-set {
+display: flex;
+border: 1.5px solid var(–input-border);
+border-radius: var(–radius-sm);
+overflow: hidden;
+height: 46px;
+}
+.toggle-opt {
+flex: 1;
+border: none;
+background: var(–input-bg);
+font-size: .82rem;
+font-family: ‘Sora’, sans-serif;
+font-weight: 500;
+color: var(–text3);
+cursor: pointer;
+transition: var(–transition);
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
+}
+.toggle-opt + .toggle-opt { border-left: 1.5px solid var(–input-border); }
+.toggle-opt.active { background: var(–primary); color: #fff; }
+.toggle-opt:not(.active):hover { background: var(–surface3); color: var(–text1); }
+
+/* ============================================================
+CALCULATED VALUE BOX
+============================================================ */
+.calc-box {
+background: var(–calc-bg);
+border: 1.5px solid var(–calc-border);
+border-radius: var(–radius-sm);
+padding: 13px 16px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 12px;
+margin-top: 4px;
+}
+.calc-box-label {
+font-size: .78rem;
+font-weight: 500;
+color: var(–primary);
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.calc-box-value {
+font-size: 1.1rem;
+font-weight: 800;
+color: var(–primary);
+font-variant-numeric: tabular-nums;
+}
+
+/* Warning box */
+.warn-box {
+background: var(–warning-light);
+border: 1.5px solid var(–warning);
+border-radius: var(–radius-sm);
+padding: 12px 14px;
+display: flex;
+gap: 10px;
+font-size: .78rem;
+color: var(–warning);
+margin-top: 12px;
+}
+.warn-box.hidden { display: none; }
+.warn-box-title { font-weight: 700; margin-bottom: 2px; }
+
+/* ============================================================
+ITR TABLE
+============================================================ */
+.itr-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.itr-table {
+width: 100%;
+border-collapse: collapse;
+font-size: .82rem;
+min-width: 460px;
+}
+.itr-table th {
+background: var(–surface3);
+color: var(–text2);
+font-weight: 600;
+font-size: .72rem;
+text-transform: uppercase;
+letter-spacing: .04em;
+padding: 10px 12px;
+border: 1px solid var(–border);
+text-align: left;
+white-space: nowrap;
+}
+.itr-table td {
+padding: 6px 10px;
+border: 1px solid var(–border);
+vertical-align: middle;
+}
+.itr-table td input {
+width: 100%;
+border: 1.5px solid var(–input-border);
+border-radius: var(–radius-xs);
+padding: 7px 10px;
+font-size: .83rem;
+font-family: ‘Sora’, sans-serif;
+outline: none;
+color: var(–input-text);
+background: var(–input-bg);
+transition: var(–transition);
+}
+.itr-table td input:focus { border-color: var(–primary); }
+
+.btn-add-row {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+margin-top: 12px;
+padding: 8px 15px;
+border: 1.5px dashed var(–border2);
+background: transparent;
+color: var(–text3);
+border-radius: var(–radius-sm);
+font-size: .79rem;
+font-family: ‘Sora’, sans-serif;
+cursor: pointer;
+transition: var(–transition);
+font-weight: 500;
+}
+.btn-add-row:hover { border-color: var(–primary); color: var(–primary); background: var(–primary-light); }
+
+.btn-row-del {
+width: 28px;
+height: 28px;
+border: none;
+background: var(–error-light);
+color: var(–error);
+border-radius: var(–radius-xs);
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: var(–transition);
+}
+.btn-row-del:hover { opacity: .8; }
+
+/* ============================================================
+DECLARATION BOX
+============================================================ */
+.decl-box {
+background: var(–decl-bg);
+border: 1px solid var(–border);
+border-left: 4px solid var(–decl-border);
+border-radius: var(–radius-sm);
+padding: 15px;
+font-size: .8rem;
+color: var(–text2);
+line-height: 1.8;
+font-style: italic;
+}
+.decl-box strong { font-style: normal; color: var(–text1); }
+
+/* ============================================================
+PART B TOGGLE
+============================================================ */
+.part-b-toggle {
+display: flex;
+align-items: center;
+gap: 12px;
+cursor: pointer;
+padding: 4px 0;
+}
+.part-b-toggle input[type=“checkbox”] {
+width: 18px;
+height: 18px;
+accent-color: var(–primary);
+cursor: pointer;
+flex-shrink: 0;
+}
+.part-b-label-block { flex: 1; }
+.part-b-label-title { font-size: .88rem; font-weight: 600; color: var(–text1); }
+.part-b-label-sub   { font-size: .72rem; color: var(–text3); margin-top: 1px; }
+
+.part-b-body { display: none; }
+.part-b-body.open { display: block; }
+
+/* ============================================================
+BUTTONS
+============================================================ */
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 7px;
+padding: 12px 22px;
+border-radius: var(–radius-sm);
+font-size: .88rem;
+font-weight: 600;
+font-family: ‘Sora’, sans-serif;
+cursor: pointer;
+border: none;
+transition: var(–transition);
+text-decoration: none;
+letter-spacing: -.01em;
+white-space: nowrap;
+-webkit-tap-highlight-color: transparent;
+}
+
+.btn-primary {
+background: var(–primary);
+color: #fff;
+}
+.btn-primary:hover {
+background: var(–primary-dark);
+transform: translateY(-1px);
+box-shadow: 0 6px 20px var(–primary-glow);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+background: var(–surface3);
+color: var(–text2);
+border: 1.5px solid var(–border2);
+}
+.btn-secondary:hover { color: var(–text1); border-color: var(–text3); }
+
+.btn-success {
+background: var(–success);
+color: #fff;
+}
+.btn-success:hover {
+opacity: .9;
+transform: translateY(-1px);
+box-shadow: 0 6px 20px var(–success-light);
+}
+
+.btn-outline-primary {
+background: var(–primary-light);
+color: var(–primary);
+border: 1.5px solid var(–primary-glow);
+}
+.btn-outline-primary:hover { opacity: .85; }
+
+.btn-warn {
+background: var(–error-light);
+color: var(–error);
+border: 1.5px solid var(–error);
+}
+.btn-warn:hover { opacity: .85; }
+
+.btn-sm  { padding: 8px 15px; font-size: .79rem; }
+.btn-lg  { padding: 14px 28px; font-size: .95rem; }
+.btn-full { width: 100%; }
+
+/* ============================================================
+NAVIGATION ROW
+============================================================ */
+.nav-row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 10px;
+margin-top: 22px;
+flex-wrap: wrap;
+}
+.nav-row-right { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+/* Mobile sticky nav */
+.sticky-nav {
+display: none;
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+background: var(–sticky-nav-bg);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-top: 1px solid var(–sticky-nav-border);
+padding: 10px 14px;
+z-index: 90;
+gap: 8px;
+}
+@media (max-width: 768px) {
+.sticky-nav { display: flex; }
+.nav-row    { display: none; }
+.sticky-nav .btn { flex: 1; }
+}
+
+/* ============================================================
+REVIEW PAGE
+============================================================ */
+.review-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 18px;
+}
+
+.review-section-title {
+font-size: .7rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: .08em;
+color: var(–text4);
+margin-bottom: 10px;
+padding-bottom: 7px;
+border-bottom: 1px solid var(–border);
+}
+
+.review-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px 18px;
+}
+@media (max-width: 480px) { .review-grid { grid-template-columns: 1fr; } }
+
+.review-item { display: flex; flex-direction: column; gap: 2px; }
+.review-label {
+font-size: .66rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: .05em;
+color: var(–review-label-color);
+}
+.review-val { font-size: .86rem; color: var(–text1); font-weight: 500; }
+.review-val.mono {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: .79rem;
+letter-spacing: .04em;
+}
+
+/* ============================================================
+MODAL
+============================================================ */
+.modal-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: var(–overlay);
+z-index: 200;
+align-items: flex-start;
+justify-content: center;
+padding: 18px 12px;
+overflow-y: auto;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+background: var(–card-bg);
+border-radius: var(–radius);
+width: 100%;
+max-width: 720px;
+box-shadow: var(–shadow-lg);
+margin: auto;
+border: 1px solid var(–card-border);
+}
+
+.modal-head {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 16px 20px;
+border-bottom: 1px solid var(–border);
+position: sticky;
+top: 0;
+background: var(–card-bg);
+border-radius: var(–radius) var(–radius) 0 0;
+z-index: 5;
+}
+.modal-title { font-size: .95rem; font-weight: 700; color: var(–text1); }
+.modal-close {
+width: 30px;
+height: 30px;
+border: none;
+background: var(–surface3);
+color: var(–text3);
+border-radius: 7px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1rem;
+transition: var(–transition);
+}
+.modal-close:hover { color: var(–text1); }
+.modal-body   { padding: 20px; }
+.modal-footer {
+display: flex;
+gap: 8px;
+justify-content: flex-end;
+padding: 14px 20px;
+border-top: 1px solid var(–border);
+flex-wrap: wrap;
+}
+
+/* ============================================================
+TOAST
+============================================================ */
+.toast-stack {
+position: fixed;
+bottom: 80px;
+right: 16px;
+z-index: 999;
+display: flex;
+flex-direction: column;
+gap: 7px;
+max-width: 310px;
+width: calc(100vw - 32px);
+}
+@media (min-width: 769px) { .toast-stack { bottom: 22px; } }
+
+.toast {
+display: flex;
+align-items: flex-start;
+gap: 9px;
+background: #1e293b;
+color: #f1f5f9;
+border-radius: 10px;
+padding: 11px 14px;
+font-size: .8rem;
+box-shadow: 0 8px 24px rgba(0,0,0,.4);
+border: 1px solid rgba(255,255,255,.07);
+animation: toastIn .28s cubic-bezier(.4,0,.2,1) both;
+}
+[data-theme=“light”] .toast { background: #1e293b; color: #f1f5f9; }
+.toast.success { background: #064e3b; border-color: rgba(52,211,153,.15); }
+.toast.error   { background: #7f1d1d; border-color: rgba(252,165,165,.15); }
+.toast.warn    { background: #78350f; border-color: rgba(252,211,77,.15);  }
+.toast-icon { flex-shrink: 0; margin-top: 1px; }
+.toast-msg  { flex: 1; line-height: 1.4; }
+@keyframes toastIn {
+from { opacity:0; transform:translateX(18px); }
+to   { opacity:1; transform:translateX(0); }
+}
+
+/* ============================================================
+STEP HEADING
+============================================================ */
+.step-heading {
+margin-bottom: 20px;
+animation: cardIn .32s cubic-bezier(.4,0,.2,1) both;
+}
+.step-heading-tag {
+display: inline-flex;
+align-items: center;
+gap: 5px;
+font-size: .68rem;
+font-weight: 600;
+letter-spacing: .06em;
+text-transform: uppercase;
+color: #60a5fa;
+margin-bottom: 6px;
+background: rgba(59,130,246,.1);
+padding: 3px 9px;
+border-radius: 20px;
+border: 1px solid rgba(59,130,246,.2);
+}
+[data-theme=“light”] .step-heading-tag {
+color: #2563eb;
+background: #eff6ff;
+border-color: #bfdbfe;
+}
+.step-heading h2 {
+font-size: 1.45rem;
+font-weight: 800;
+color: var(–text1);
+letter-spacing: -.02em;
+line-height: 1.2;
+margin-bottom: 4px;
+}
+.step-heading p { font-size: .82rem; color: var(–text3); }
+
+/* ============================================================
+SECTION TAG
+============================================================ */
+.section-tag {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+background: var(–section-tag-bg);
+color: var(–section-tag-color);
+border: 1px solid var(–section-tag-border);
+border-radius: 6px;
+padding: 4px 10px;
+font-size: .72rem;
+font-weight: 600;
+letter-spacing: .03em;
+text-transform: uppercase;
+margin-bottom: 14px;
+}
+
+/* ============================================================
+UTILITY
+============================================================ */
+.hidden  { display: none !important; }
+.mono-input {
+font-family: ‘JetBrains Mono’, monospace !important;
+letter-spacing: .05em;
+text-transform: uppercase;
+}
+.row { –bs-gutter-x: 14px; }
+
+@media (max-width: 576px) {
+.app-body { padding-top: 18px; }
+.form-container { padding: 0 12px; }
+.card-header-strip { padding: 15px 15px 0; }
+.card-body { padding: 0 15px 18px; }
+.f-input, .f-select { height: 48px; }
+.step-heading h2 { font-size: 1.2rem; }
+}
+
+/* ============================================================
+PRINT STYLES
+============================================================ */
+@media print {
+.app-header, .disclaimer-bar, .stepper-wrap,
+.nav-row, .sticky-nav, .toast-stack,
+.modal-overlay, .step-heading-tag { display: none !important; }
+body { background: #fff !important; color: #000 !important; }
+.form-card { box-shadow: none !important; border: 1px solid #ccc !important; break-inside: avoid; }
+.step-heading h2 { color: #000 !important; }
+#step-2, #step-3, #step-4 { display: block !important; }
+}
+
+/* ============================================================
+PDF TEMPLATE (off-screen)
+============================================================ */
+#pdf-render-area {
+position: absolute;
+left: -9999px;
+top: 0;
+width: 210mm;
+background: #fff;
+color: #000;
+font-family: Arial, sans-serif;
+font-size: 10pt;
+padding: 10mm 12mm;
+}
+
+/* ============================================================
+GENERATE PAGE ACTION CARD
+============================================================ */
+.action-card {
+background: linear-gradient(135deg, var(–bg2) 0%, var(–bg3) 100%);
+border: 1px solid var(–border2);
+border-radius: var(–radius);
+padding: 22px;
+margin-bottom: 16px;
+}
+[data-theme=“light”] .action-card {
+background: linear-gradient(135deg, #1e293b 0%, #263351 100%);
+border-color: #475569;
+}
+.action-card .act-title { font-size: .88rem; font-weight: 600; color: #f1f5f9; margin-bottom: 4px; }
+.action-card .act-sub   { font-size: .76rem; color: #94a3b8; margin-bottom: 18px; }
+.action-btns { display: flex; gap: 9px; flex-wrap: wrap; }
+</style>
+
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+
+<header class="app-header">
+  <div class="header-inner">
+    <a class="header-brand" href="#">
+      <div class="brand-icon">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 12h6M9 16h4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">Form 121 Generator</div>
+        <div class="brand-sub">Declaration u/s 197A &mdash; Income Tax Act</div>
+      </div>
+    </a>
+    <div class="header-actions">
+      <div class="lang-group">
+        <button class="lang-btn active" id="lang-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="lang-ml" onclick="setLang('ml')">ML</button>
+      </div>
+      <button class="hbtn hbtn-demo" onclick="autofillDemo()">
+        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+        <span>Demo</span>
+      </button>
+      <button class="hbtn hbtn-ghost" onclick="confirmReset()">
+        <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/></svg>
+        <span>Reset</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+        <svg id="icon-dark" width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+        <svg id="icon-light" width="15" height="15" viewBox="0 0 20 20" fill="currentColor" class="hidden"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Disclaimer -->
+
+<div class="disclaimer-bar">
+  <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor" style="flex-shrink:0;margin-top:1px"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+  <span><strong>Disclaimer:</strong> This is not a government website. Provided for convenience only. Users are solely responsible for the accuracy of information submitted to tax authorities.</span>
+</div>
+
+<!-- ============================================================
+     MAIN BODY
+     ============================================================ -->
+
+<div class="app-body">
+  <div class="form-container">
+
+```
+<!-- STEPPER -->
+<div class="stepper-wrap">
+  <div class="stepper" id="stepper">
+    <div class="stepper-track"><div class="stepper-fill" id="stepper-fill" style="width:0%"></div></div>
+    <div class="step-node" onclick="tryGoStep(1)">
+      <div class="step-bubble active" id="sb-1">1</div>
+      <div class="step-label active" id="sl-1">Personal<br>Details</div>
+    </div>
+    <div class="step-node" onclick="tryGoStep(2)">
+      <div class="step-bubble idle" id="sb-2">2</div>
+      <div class="step-label idle" id="sl-2">Income<br>Details</div>
+    </div>
+    <div class="step-node" onclick="tryGoStep(3)">
+      <div class="step-bubble idle" id="sb-3">3</div>
+      <div class="step-label idle" id="sl-3">ITR &amp;<br>Declaration</div>
+    </div>
+    <div class="step-node" onclick="tryGoStep(4)">
+      <div class="step-bubble idle" id="sb-4">4</div>
+      <div class="step-label idle" id="sl-4">Review &amp;<br>Generate</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================
+     STEP 1: PERSONAL DETAILS
+     ==================================================== -->
+<div id="step-1">
+  <div class="step-heading">
+    <div class="step-heading-tag">
+      <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+      Step 1 of 4
+    </div>
+    <h2><span class="en">Personal Details</span><span class="ml hidden">വ്യക്തിഗത വിവരങ്ങള്‍</span></h2>
+    <p><span class="en">PART A -- Declarant information as per Income Tax records</span><span class="ml hidden">ഭാഗം A -- ആദായ നികുതി രേഖകള്‍ അനുസരിച്ചുള്ള വിവരങ്ങള്‍</span></p>
+  </div>
+
+  <!-- Identity -->
+  <div class="form-card">
+    <div class="card-header-strip">
+      <div class="card-icon blue">
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">
+          <span class="en">Identity &amp; Status</span><span class="ml hidden">ഐഡന്‍റിറ്റി</span>
+          <span class="card-badge">Required</span>
+        </div>
+        <div class="card-desc"><span class="en">Enter name exactly as on your PAN card. All caps.</span><span class="ml hidden">PAN കാര്‍ഡിലുള്ളത് പോലെ നല്‍കുക</span></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="field-group">
+            <label class="field-label">Full Name (No Initials) <span class="req">*</span></label>
+            <input type="text" id="f-name" class="f-input mono-input" placeholder="E.G. ARJUN KUMAR NAIR" autocomplete="name" oninput="this.value=this.value.toUpperCase();syncDeclName()"/>
+            <div class="field-error" id="e-name">Full name is required (no initials)</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="field-group">
+            <label class="field-label">PAN <span class="req">*</span></label>
+            <input type="text" id="f-pan" class="f-input mono-input" placeholder="ABCDE1234F" maxlength="10" oninput="this.value=this.value.toUpperCase()"/>
+            <div class="field-error" id="e-pan">Invalid PAN (ABCDE1234F)</div>
+            <div class="field-hint">5 letters + 4 digits + 1 letter</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="field-group">
+            <label class="field-label">Status <span class="req">*</span></label>
+            <div class="f-select-wrap">
+              <select id="f-status" class="f-select">
+                <option value="">Select status</option>
+                <option value="Individual">Individual</option>
+                <option value="HUF">HUF</option>
+                <option value="Trust">Trust</option>
+                <option value="AOP">AOP / BOI</option>
+              </select>
+            </div>
+            <div class="field-error" id="e-status">Status is required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="field-group">
+            <label class="field-label">Residential Status <span class="req">*</span></label>
+            <div class="f-select-wrap">
+              <select id="f-res" class="f-select">
+                <option value="">Select</option>
+                <option value="Resident">Resident (R)</option>
+                <option value="Non-Resident">Non-Resident (NR)</option>
+                <option value="RNOR">RNOR</option>
+              </select>
+            </div>
+            <div class="field-error" id="e-res">Required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Tax Year (Previous Year) <span class="req">*</span></label>
+            <input type="text" id="f-taxyear" class="f-input" placeholder="2026-27" value="2026-27" oninput="updateDeclYear()"/>
+            <div class="field-hint">Year for which declaration is being made</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Age 60 or Above? <span class="req">*</span></label>
+            <div class="toggle-set">
+              <button class="toggle-opt" id="age-yes" onclick="setAge(true)" type="button">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Yes (Senior)
+              </button>
+              <button class="toggle-opt active" id="age-no" onclick="setAge(false)" type="button">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Address -->
+  <div class="form-card">
+    <div class="card-header-strip">
+      <div class="card-icon blue">
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title"><span class="en">Address</span><span class="ml hidden">വിലാസം</span></div>
+        <div class="card-desc"><span class="en">Complete residential / correspondence address</span><span class="ml hidden">പൂര്‍ണ്ണ വിലാസം നല്‍കുക</span></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="field-group">
+            <label class="field-label">Flat / House / Building No. <span class="req">*</span></label>
+            <input type="text" id="f-flat" class="f-input" placeholder="e.g. Flat 3A, Sunrise Apartments"/>
+            <div class="field-error" id="e-flat">Building/Flat number is required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Street / Road <span class="req">*</span></label>
+            <input type="text" id="f-street" class="f-input" placeholder="e.g. MG Road"/>
+            <div class="field-error" id="e-street">Street name is required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Area / Locality</label>
+            <input type="text" id="f-area" class="f-input" placeholder="e.g. Ernakulam South"/>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="field-group">
+            <label class="field-label">District <span class="req">*</span></label>
+            <input type="text" id="f-dist" class="f-input" placeholder="e.g. Ernakulam"/>
+            <div class="field-error" id="e-dist">District is required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="field-group">
+            <label class="field-label">State <span class="req">*</span></label>
+            <div class="f-select-wrap">
+              <select id="f-state" class="f-select">
+                <option value="">Select State</option>
+                <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option><option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option><option>Odisha</option><option>Punjab</option><option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option><option>Delhi (NCT)</option><option>Jammu and Kashmir</option><option>Ladakh</option><option>Puducherry</option><option>Chandigarh</option>
+              </select>
+            </div>
+            <div class="field-error" id="e-state">State is required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="field-group">
+            <label class="field-label">PIN Code <span class="req">*</span></label>
+            <input type="text" id="f-pin" class="f-input mono-input" placeholder="682001" maxlength="6" oninput="this.value=this.value.replace(/\D/g,'')"/>
+            <div class="field-error" id="e-pin">6-digit PIN code required</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="field-group">
+            <label class="field-label">Country</label>
+            <input type="text" id="f-country" class="f-input" value="India"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="form-card">
+    <div class="card-header-strip">
+      <div class="card-icon blue">
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title"><span class="en">Contact Information</span><span class="ml hidden">ബന്ധം</span></div>
+        <div class="card-desc">Email and mobile for communication</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Email Address <span class="req">*</span></label>
+            <input type="email" id="f-email" class="f-input" placeholder="you@example.com" autocomplete="email"/>
+            <div class="field-error" id="e-email">Valid email address required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Mobile Number <span class="req">*</span></label>
+            <div class="input-addon-wrap" id="mob-wrap">
+              <div class="input-addon">
+                <select id="f-ccode" style="border:none;background:transparent;font-family:'Sora',sans-serif;font-size:.78rem;color:var(--text3);cursor:pointer;outline:none;padding:0 4px;">
+                  <option value="+91">+91</option>
+                  <option value="+1">+1</option>
+                  <option value="+44">+44</option>
+                  <option value="+971">+971</option>
+                </select>
+              </div>
+              <input type="tel" id="f-mobile" class="input-addon-field" placeholder="9876543210" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'')"/>
+            </div>
+            <div class="field-error" id="e-mobile">10-digit mobile number required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <div></div>
+    <button class="btn btn-primary" onclick="goStep(2)">
+      <span class="en">Income Details</span><span class="ml hidden">വരുമാനം</span>
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ====================================================
+     STEP 2: INCOME DETAILS
+     ==================================================== -->
+<div id="step-2" class="hidden">
+  <div class="step-heading">
+    <div class="step-heading-tag">
+      <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+      Step 2 of 4
+    </div>
+    <h2><span class="en">Income Details</span><span class="ml hidden">വരുമാന വിവരങ്ങള്‍</span></h2>
+    <p><span class="en">PART A -- Section 2: Nature and estimated income for the tax year</span><span class="ml hidden">ഭാഗം A -- വകുപ്പ് 2</span></p>
+  </div>
+
+  <div class="form-card">
+    <div class="card-header-strip">
+      <div class="card-icon green">
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title"><span class="en">Nature &amp; Estimated Income</span><span class="ml hidden">വരുമാനം</span></div>
+        <div class="card-desc">Details of income for which TDS deduction is being claimed</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Nature of Income <span class="req">*</span></label>
+            <div class="f-select-wrap">
+              <select id="f-nature" class="f-select">
+                <option value="">Select nature</option>
+                <option value="Interest from bank deposits">Interest from bank deposits</option>
+                <option value="Interest from post office deposits">Interest from post office deposits</option>
+                <option value="Interest on securities">Interest on securities</option>
+                <option value="Dividend">Dividend</option>
+                <option value="Insurance commission">Insurance commission</option>
+                <option value="Income from units / mutual funds">Income from units / mutual funds</option>
+                <option value="Income from National Savings Scheme">Income from National Savings Scheme</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            <div class="field-error" id="e-nature">Nature of income is required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Estimated Income (Rs.) <span class="req">*</span></label>
+            <div class="input-addon-wrap">
+              <div class="input-addon">Rs.</div>
+              <input type="number" id="f-estincome" class="input-addon-field" placeholder="e.g. 50000" min="0" oninput="calcAgg()"/>
+            </div>
+            <div class="field-error" id="e-estincome">Estimated income is required</div>
+          </div>
+        </div>
+        <div class="col-12"><div class="section-divider" style="margin:4px 0 0"></div></div>
+        <div class="col-12">
+          <div class="section-tag">
+            <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+            Previous Form 121 Details
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">No. of Previous Form 121s Filed</label>
+            <input type="number" id="f-prevcount" class="f-input" placeholder="0" min="0" value="0" oninput="calcAgg()"/>
+            <div class="field-hint">In the same financial year, with same deductor</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Aggregate Income from Previous Forms (Rs.)</label>
+            <div class="input-addon-wrap">
+              <div class="input-addon">Rs.</div>
+              <input type="number" id="f-prevagg" class="input-addon-field" placeholder="0" min="0" value="0" oninput="calcAgg()"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="calc-box">
+            <div class="calc-box-label">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm1 8a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8a1 1 0 10-2 0v2H7z" clip-rule="evenodd"/></svg>
+              Auto-calculated: Total Aggregate Income
+              <span style="font-size:.65rem;opacity:.7">(Estimated + Previous)</span>
+            </div>
+            <div class="calc-box-value" id="calc-agg-val">Rs. 0</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="warn-box hidden" id="warn-income">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" style="flex-shrink:0;margin-top:1px"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            <div>
+              <div class="warn-box-title">Exemption Threshold Exceeded</div>
+              Your aggregate income may exceed the basic exemption limit (Rs.2,50,000 / Rs.3,00,000 for senior citizens). You may not be eligible to file Form 121. Consult a tax professional.
+            </div>
+          </div>
+        </div>
+        <div class="col-12"><div class="section-divider" style="margin:4px 0 0"></div></div>
+        <div class="col-12">
+          <div class="field-group">
+            <label class="field-label">Estimated Total Income for Tax Year (Rs.) <span class="req">*</span></label>
+            <div class="input-addon-wrap">
+              <div class="input-addon">Rs.</div>
+              <input type="number" id="f-totalincome" class="input-addon-field" placeholder="e.g. 240000" min="0"/>
+            </div>
+            <div class="field-error" id="e-totalincome">Total income is required</div>
+            <div class="field-hint">Total income from all sources for the entire tax year</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-secondary" onclick="goStep(1)">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+      Back
+    </button>
+    <button class="btn btn-primary" onclick="goStep(3)">
+      <span class="en">ITR Details</span><span class="ml hidden">ഐടിആര്‍</span>
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ====================================================
+     STEP 3: ITR & DECLARATION
+     ==================================================== -->
+<div id="step-3" class="hidden">
+  <div class="step-heading">
+    <div class="step-heading-tag">
+      <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+      Step 3 of 4
+    </div>
+    <h2><span class="en">ITR &amp; Declaration</span><span class="ml hidden">ഐടിആര്‍ വിവരങ്ങള്‍</span></h2>
+    <p><span class="en">Income Tax Returns filed in the last 2 assessment years + statutory declaration</span><span class="ml hidden">കഴിഞ്ഞ 2 നികുതി വര്‍ഷങ്ങളിലെ ഐടിആര്‍</span></p>
+  </div>
+
+  <!-- ITR Table -->
+  <div class="form-card">
+    <div class="card-header-strip">
+      <div class="card-icon amber">
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title"><span class="en">ITR Filing History</span><span class="ml hidden">ഐടിആര്‍ ചരിത്രം</span></div>
+        <div class="card-desc">Details of ITR filed in the last two assessment years preceding this tax year</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="itr-scroll">
+        <table class="itr-table">
+          <thead>
+            <tr>
+              <th style="width:36px;">Sl.</th>
+              <th style="width:130px;">Assessment Year</th>
+              <th style="min-width:175px;">Acknowledgement No.</th>
+              <th style="min-width:130px;">Total Income (Rs.)</th>
+              <th style="width:42px;"></th>
+            </tr>
+          </thead>
+          <tbody id="itr-body">
+            <tr>
+              <td style="text-align:center;color:var(--text4);font-size:.74rem;">1</td>
+              <td><input type="text" placeholder="e.g. 2025-26" class="itr-ay"/></td>
+              <td><input type="text" placeholder="15-digit ack. no." maxlength="15" class="itr-ack"/></td>
+              <td><input type="number" placeholder="e.g. 200000" min="0" class="itr-inc"/></td>
+              <td><button class="btn-row-del" onclick="delITRRow(this)" title="Remove"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn-add-row" id="btn-add-itr" onclick="addITRRow()">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+        Add Second Year <span style="font-size:.68rem;opacity:.6">(max 2)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Declaration -->
+  <div class="form-card">
+    <div class="card-header-strip">
+      <div class="card-icon slate">
+        <svg width="17" height="17" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="card-title-block">
+        <div class="card-title">Declaration</div>
+        <div class="card-desc">Statutory declaration text as per Income Tax rules</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="decl-box">
+        I/We <strong id="decl-name">[Declarant Name]</strong>, do hereby declare that the particulars given above are true, correct and complete to the best of my/our knowledge and belief. I/We declare that the income referred to in this form is not includible in the total income of any other person under sections 60 to 64 of the Income-tax Act, 1961. I/We further declare that the tax on my/our estimated total income computed in accordance with the provisions of the Income-tax Act, 1961, will be nil during the previous year ending on 31st March, <strong id="decl-year">[Year]</strong>.
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Place <span class="req">*</span></label>
+            <input type="text" id="f-place" class="f-input" placeholder="e.g. Thiruvananthapuram"/>
+            <div class="field-error" id="e-place">Place of declaration is required</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Date (Auto-filled)</label>
+            <input type="text" id="f-date" class="f-input" readonly style="cursor:not-allowed;opacity:.7"/>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="field-group">
+            <label class="field-label">Name / Digital Signature Acknowledgement</label>
+            <input type="text" id="f-signature" class="f-input" placeholder="Type your full name as digital acknowledgement"/>
+            <div class="field-hint">Printed form requires physical signature / thumb impression</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part B -->
+  <div class="form-card">
+    <div class="card-body" style="padding-top:20px;">
+      <label class="part-b-toggle">
+        <input type="checkbox" id="chk-partb" onchange="togglePartB()"/>
+        <div class="part-b-label-block">
+          <div class="part-b-label-title">Include Part B -- Bank / Deductor Section</div>
+          <div class="part-b-label-sub">Optional. To be completed by the bank branch or person responsible for paying</div>
+        </div>
+      </label>
+      <div class="part-b-body" id="partb-body">
+        <div class="section-divider"></div>
+        <div class="section-tag">
+          <svg width="11" height="11" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/></svg>
+          PART B -- For use by Person Responsible for Paying
+        </div>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="field-group">
+              <label class="field-label">Bank / Deductor Name</label>
+              <input type="text" id="f-bname" class="f-input" placeholder="e.g. State Bank of India"/>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="field-group">
+              <label class="field-label">Branch Address</label>
+              <input type="text" id="f-baddr" class="f-input" placeholder="Branch address"/>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="field-group">
+              <label class="field-label">TAN of Deductor</label>
+              <input type="text" id="f-btan" class="f-input mono-input" placeholder="AAAA99999A" maxlength="10" oninput="this.value=this.value.toUpperCase()"/>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="field-group">
+              <label class="field-label">PAN of Deductor</label>
+              <input type="text" id="f-bpan" class="f-input mono-input" placeholder="AAAAA9999A" maxlength="10" oninput="this.value=this.value.toUpperCase()"/>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="field-group">
+              <label class="field-label">UIN</label>
+              <input type="text" id="f-buin" class="f-input" placeholder="UIN (if applicable)"/>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="field-group">
+              <label class="field-label">Date of Receipt</label>
+              <input type="date" id="f-bdate" class="f-input"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-secondary" onclick="goStep(2)">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+      Back
+    </button>
+    <button class="btn btn-primary" onclick="goStep(4)">
+      <span class="en">Review &amp; Generate</span><span class="ml hidden">അവലോകനം</span>
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ====================================================
+     STEP 4: REVIEW & GENERATE
+     ==================================================== -->
+<div id="step-4" class="hidden">
+  <div class="step-heading">
+    <div class="step-heading-tag">
+      <svg width="10" height="10" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+      Step 4 of 4
+    </div>
+    <h2><span class="en">Review &amp; Generate</span><span class="ml hidden">അവലോകനം</span></h2>
+    <p><span class="en">Verify all details before downloading your Form 121 PDF</span><span class="ml hidden">ഡൗണ്‍ലോഡ് ചെയ്യുന്നതിന് മുന്‍പ് എല്ലാ വിവരങ്ങളും പരിശോധിക്കുക</span></p>
+  </div>
+
+  <!-- Summary -->
+  <div class="form-card">
+    <div class="card-body" style="padding-top:20px;">
+      <div class="review-header">
+        <div style="font-size:.92rem;font-weight:700;color:var(--text1);display:flex;align-items:center;gap:7px;">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="color:var(--success)"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Form Summary
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="goStep(1)">
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+          Edit
+        </button>
+      </div>
+      <div class="review-section-title">Personal Details</div>
+      <div class="review-grid" id="rv-personal"></div>
+      <div class="section-divider"></div>
+      <div class="review-section-title">Income Details</div>
+      <div class="review-grid" id="rv-income"></div>
+      <div class="section-divider"></div>
+      <div class="review-section-title">ITR History</div>
+      <div id="rv-itr"></div>
+      <div class="section-divider"></div>
+      <div class="review-section-title">Declaration</div>
+      <div class="review-grid" id="rv-decl"></div>
+    </div>
+  </div>
+
+  <!-- Action Card -->
+  <div class="action-card">
+    <div class="act-title">Ready to generate your Form 121</div>
+    <div class="act-sub">Preview the form, download as PDF, or print directly</div>
+    <div class="action-btns">
+      <button class="btn btn-outline-primary" onclick="openPreview()">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+        Preview Form
+      </button>
+      <button class="btn btn-success" onclick="downloadPDF()">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        Download PDF
+      </button>
+      <button class="btn btn-secondary" onclick="window.print()">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm8-5a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+        Print
+      </button>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-secondary" onclick="goStep(3)">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+      Back
+    </button>
+    <button class="btn btn-success" onclick="downloadPDF()">
+      <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+      Download PDF
+    </button>
+  </div>
+</div>
+```
+
+  </div><!-- /form-container -->
+</div><!-- /app-body -->
+
+<!-- Mobile Sticky Nav -->
+
+<div class="sticky-nav" id="sticky-nav">
+  <button class="btn btn-secondary" id="mob-back" onclick="mobBack()">
+    <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/></svg>
+    Back
+  </button>
+  <button class="btn btn-primary" id="mob-next" onclick="mobNext()">
+    Next
+    <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+  </button>
+</div>
+
+<!-- Preview Modal -->
+
+<div class="modal-overlay" id="preview-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Form 121 Preview</div>
+      <button class="modal-close" onclick="closePreview()">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="preview-content"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary btn-sm" onclick="closePreview()">Close</button>
+      <button class="btn btn-secondary btn-sm" onclick="window.print()">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a1 1 0 001 1h8a1 1 0 001-1v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a1 1 0 00-1-1H6a1 1 0 00-1 1zm2 0h6v3H7V4zm-1 9v-2h8v2H6zm8-5a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+        Print
+      </button>
+      <button class="btn btn-success btn-sm" onclick="downloadPDF()">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        Download PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast stack -->
+
+<div class="toast-stack" id="toast-stack"></div>
+
+<!-- Off-screen PDF render area -->
+
+<div id="pdf-render-area"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* ============================================================
+   FORM 121 GENERATOR -- JAVASCRIPT
+   ============================================================ */
+
+// State
+let STEP    = 1;
+let SENIOR  = false;
+let ITR_ROWS = 1;
+const DRAFT_KEY = 'form121_v3';
+
+// ============================================================
+// INIT
+// ============================================================
+(function init() {
+  // Date
+  document.getElementById('f-date').value =
+    new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' });
+
+  // Theme: load from storage or detect system
+  const saved = localStorage.getItem('f121_theme');
+  if (saved) {
+    applyTheme(saved);
+  } else {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }
+
+  // Close preview on overlay click
+  document.getElementById('preview-modal').addEventListener('click', function(e) {
+    if (e.target === this) closePreview();
+  });
+
+  loadDraft();
+  renderStepper();
+  updateMobileNav();
+})();
+
+// ============================================================
+// THEME
+// ============================================================
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const isDark = theme === 'dark';
+  document.getElementById('icon-dark').classList.toggle('hidden', !isDark);
+  document.getElementById('icon-light').classList.toggle('hidden', isDark);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem('f121_theme', next);
+}
+
+// ============================================================
+// STEPPER
+// ============================================================
+function renderStepper() {
+  const pct = ((STEP - 1) / 3) * 100;
+  document.getElementById('stepper-fill').style.width = pct + '%';
+  for (let i = 1; i <= 4; i++) {
+    const b = document.getElementById('sb-' + i);
+    const l = document.getElementById('sl-' + i);
+    b.className = 'step-bubble';
+    l.className = 'step-label';
+    if (i < STEP) {
+      b.classList.add('done');
+      b.innerHTML = '<svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>';
+      l.classList.add('done');
+    } else if (i === STEP) {
+      b.classList.add('active');
+      b.textContent = String(i);
+      l.classList.add('active');
+    } else {
+      b.classList.add('idle');
+      b.textContent = String(i);
+      l.classList.add('idle');
+    }
+  }
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function tryGoStep(n) {
+  if (n < STEP) goStep(n);
+  else if (n === STEP + 1) goStep(n);
+}
+
+function goStep(n) {
+  if (n > STEP && !validateStep(STEP)) return;
+  document.getElementById('step-' + STEP).classList.add('hidden');
+  STEP = n;
+  document.getElementById('step-' + STEP).classList.remove('hidden');
+  renderStepper();
+  updateMobileNav();
+  saveDraft();
+  if (STEP === 4) buildReview();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function mobBack() {
+  if (STEP === 1) return;
+  goStep(STEP - 1);
+}
+
+function mobNext() {
+  if (STEP === 4) { downloadPDF(); return; }
+  goStep(STEP + 1);
+}
+
+function updateMobileNav() {
+  const back = document.getElementById('mob-back');
+  const next = document.getElementById('mob-next');
+  back.style.display = STEP === 1 ? 'none' : '';
+  if (STEP === 4) {
+    next.innerHTML = '<svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg> Download PDF';
+    next.className = 'btn btn-success';
+  } else {
+    next.innerHTML = 'Next <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
+    next.className = 'btn btn-primary';
+  }
+}
+
+// ============================================================
+// VALIDATION
+// ============================================================
+function validateStep(s) {
+  let ok = true;
+  if (s === 1) {
+    ok = req('f-name',   'e-name',   'Full name is required')            & ok;
+    ok = chkPAN()                                                          & ok;
+    ok = req('f-status', 'e-status', 'Status is required')                & ok;
+    ok = req('f-res',    'e-res',    'Residential status is required')     & ok;
+    ok = req('f-flat',   'e-flat',   'Flat/Building number is required')   & ok;
+    ok = req('f-street', 'e-street', 'Street name is required')            & ok;
+    ok = req('f-dist',   'e-dist',   'District is required')               & ok;
+    ok = req('f-state',  'e-state',  'State is required')                  & ok;
+    ok = chkPIN()                                                          & ok;
+    ok = chkEmail()                                                        & ok;
+    ok = chkMobile()                                                       & ok;
+    if (!ok) toast('Please fix the highlighted errors.', 'error');
+  }
+  if (s === 2) {
+    ok = req('f-nature',     'e-nature',     'Nature of income is required') & ok;
+    ok = chkNum('f-estincome',  'e-estincome',  'Estimated income is required')  & ok;
+    ok = chkNum('f-totalincome','e-totalincome','Total income is required')       & ok;
+    if (!ok) toast('Please complete all required income fields.', 'error');
+  }
+  if (s === 3) {
+    ok = req('f-place', 'e-place', 'Place of declaration is required') & ok;
+    if (!ok) toast('Please enter the place of declaration.', 'error');
+  }
+  return Boolean(ok);
+}
+
+function req(id, eid, msg) {
+  const el = document.getElementById(id);
+  const er = document.getElementById(eid);
+  if (!el || !el.value.trim()) {
+    if (el) el.classList.add('has-error');
+    if (er) { er.textContent = msg; er.classList.add('visible'); }
+    return false;
+  }
+  if (el) el.classList.remove('has-error');
+  if (er) er.classList.remove('visible');
+  return true;
+}
+
+function chkPAN() {
+  const el = document.getElementById('f-pan');
+  const er = document.getElementById('e-pan');
+  const v  = el.value.trim();
+  if (!v || !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(v)) {
+    el.classList.add('has-error');
+    er.textContent = v ? 'Invalid PAN format (e.g. ABCDE1234F)' : 'PAN is required';
+    er.classList.add('visible');
+    return false;
+  }
+  el.classList.remove('has-error'); er.classList.remove('visible');
+  return true;
+}
+
+function chkPIN() {
+  const el = document.getElementById('f-pin');
+  const er = document.getElementById('e-pin');
+  if (!/^[0-9]{6}$/.test(el.value)) {
+    el.classList.add('has-error'); er.classList.add('visible');
+    return false;
+  }
+  el.classList.remove('has-error'); er.classList.remove('visible');
+  return true;
+}
+
+function chkEmail() {
+  const el = document.getElementById('f-email');
+  const er = document.getElementById('e-email');
+  if (!el.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)) {
+    el.classList.add('has-error'); er.classList.add('visible');
+    return false;
+  }
+  el.classList.remove('has-error'); er.classList.remove('visible');
+  return true;
+}
+
+function chkMobile() {
+  const el   = document.getElementById('f-mobile');
+  const wrap = document.getElementById('mob-wrap');
+  const er   = document.getElementById('e-mobile');
+  if (!/^[0-9]{10}$/.test(el.value)) {
+    wrap.classList.add('has-error'); er.classList.add('visible');
+    return false;
+  }
+  wrap.classList.remove('has-error'); er.classList.remove('visible');
+  return true;
+}
+
+function chkNum(id, eid, msg) {
+  const el = document.getElementById(id);
+  const er = document.getElementById(eid);
+  if (!el || el.value === '' || isNaN(parseFloat(el.value))) {
+    if (er) { er.textContent = msg; er.classList.add('visible'); }
+    return false;
+  }
+  if (er) er.classList.remove('visible');
+  return true;
+}
+
+// ============================================================
+// AGE TOGGLE
+// ============================================================
+function setAge(senior) {
+  SENIOR = senior;
+  document.getElementById('age-yes').className = 'toggle-opt' + (senior ? ' active' : '');
+  document.getElementById('age-no').className  = 'toggle-opt' + (!senior ? ' active' : '');
+  calcAgg();
+}
+
+// ============================================================
+// CALCULATIONS
+// ============================================================
+function calcAgg() {
+  const est  = parseFloat(document.getElementById('f-estincome').value) || 0;
+  const prev = parseFloat(document.getElementById('f-prevagg').value)   || 0;
+  const agg  = est + prev;
+  document.getElementById('calc-agg-val').textContent = 'Rs. ' + agg.toLocaleString('en-IN');
+  const limit = SENIOR ? 300000 : 250000;
+  document.getElementById('warn-income').classList.toggle('hidden', agg <= limit);
+}
+
+// ============================================================
+// DECLARATION SYNC
+// ============================================================
+function syncDeclName() {
+  const v = document.getElementById('f-name').value.trim();
+  document.getElementById('decl-name').textContent = v || '[Declarant Name]';
+}
+
+function updateDeclYear() {
+  const ty = document.getElementById('f-taxyear').value.trim();
+  const yr = ty.split('-')[0];
+  document.getElementById('decl-year').textContent =
+    (yr && !isNaN(yr)) ? String(parseInt(yr) + 1) : '[Year]';
+}
+
+// ============================================================
+// ITR TABLE
+// ============================================================
+function addITRRow() {
+  if (ITR_ROWS >= 2) { toast('Maximum 2 ITR entries allowed.', 'warn'); return; }
+  ITR_ROWS++;
+  const tbody = document.getElementById('itr-body');
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td style="text-align:center;color:var(--text4);font-size:.74rem;">' + ITR_ROWS + '</td>' +
+    '<td><input type="text" placeholder="e.g. 2024-25" class="itr-ay"/></td>' +
+    '<td><input type="text" placeholder="15-digit ack. no." maxlength="15" class="itr-ack"/></td>' +
+    '<td><input type="number" placeholder="e.g. 180000" min="0" class="itr-inc"/></td>' +
+    '<td><button class="btn-row-del" onclick="delITRRow(this)" title="Remove">' +
+    '<svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>' +
+    '</button></td>';
+  tbody.appendChild(tr);
+  if (ITR_ROWS >= 2) document.getElementById('btn-add-itr').style.opacity = '.4';
+}
+
+function delITRRow(btn) {
+  const tbody = document.getElementById('itr-body');
+  if (tbody.children.length <= 1) { toast('At least one row is required.', 'warn'); return; }
+  btn.closest('tr').remove();
+  ITR_ROWS = Math.max(1, ITR_ROWS - 1);
+  document.getElementById('btn-add-itr').style.opacity = '1';
+  Array.from(tbody.children).forEach((r, i) => {
+    r.cells[0].textContent = String(i + 1);
+  });
+}
+
+function getITRRows() {
+  return Array.from(document.querySelectorAll('#itr-body tr')).map(tr => ({
+    ay:  (tr.querySelector('.itr-ay')  || {}).value || '',
+    ack: (tr.querySelector('.itr-ack') || {}).value || '',
+    inc: (tr.querySelector('.itr-inc') || {}).value || '',
+  }));
+}
+
+// ============================================================
+// PART B
+// ============================================================
+function togglePartB() {
+  document.getElementById('partb-body').classList.toggle('open',
+    document.getElementById('chk-partb').checked);
+}
+
+// ============================================================
+// DATA COLLECTOR
+// ============================================================
+function gv(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function collectData() {
+  const est  = parseFloat(gv('f-estincome')) || 0;
+  const prev = parseFloat(gv('f-prevagg'))   || 0;
+  const ty   = gv('f-taxyear');
+  const yr   = ty.split('-')[0];
+  const endYr = (yr && !isNaN(yr)) ? String(parseInt(yr) + 1) : '';
+  const addr = [gv('f-flat'),gv('f-street'),gv('f-area'),gv('f-dist'),gv('f-state'),gv('f-pin'),gv('f-country')].filter(Boolean).join(', ');
+  return {
+    name: gv('f-name'), pan: gv('f-pan'), status: gv('f-status'),
+    resStatus: gv('f-res'), senior: SENIOR, taxYear: ty, endYear: endYr,
+    email: gv('f-email'), mobile: gv('f-ccode') + ' ' + gv('f-mobile'),
+    addr, nature: gv('f-nature'),
+    estIncome: est, prevCount: gv('f-prevcount') || '0',
+    prevAgg: prev, aggregate: est + prev,
+    totalIncome: parseFloat(gv('f-totalincome')) || 0,
+    itrRows: getITRRows(),
+    place: gv('f-place'), date: gv('f-date'), signature: gv('f-signature'),
+    hasPartB: document.getElementById('chk-partb').checked,
+    bankName: gv('f-bname'), bankAddr: gv('f-baddr'),
+    bankTAN: gv('f-btan'), bankPAN: gv('f-bpan'),
+    bankUIN: gv('f-buin'), bankDate: gv('f-bdate'),
+  };
+}
+
+// ============================================================
+// REVIEW BUILD
+// ============================================================
+function buildReview() {
+  const d = collectData();
+  document.getElementById('decl-name').textContent = d.name || '[Declarant Name]';
+  document.getElementById('decl-year').textContent = d.endYear || '[Year]';
+
+  document.getElementById('rv-personal').innerHTML = rvItems([
+    ['Full Name', d.name, true], ['PAN', d.pan, true],
+    ['Status', d.status, false], ['Residential Status', d.resStatus, false],
+    ['Tax Year', d.taxYear, false], ['Age 60+', d.senior ? 'Yes' : 'No', false],
+    ['Email', d.email, false], ['Mobile', d.mobile, false],
+    ['Address', d.addr, false],
+  ]);
+
+  document.getElementById('rv-income').innerHTML = rvItems([
+    ['Nature', d.nature, false],
+    ['Estimated Income', 'Rs. ' + d.estIncome.toLocaleString('en-IN'), false],
+    ['Prev. Forms Filed', d.prevCount, false],
+    ['Prev. Aggregate', 'Rs. ' + d.prevAgg.toLocaleString('en-IN'), false],
+    ['Total Aggregate', 'Rs. ' + d.aggregate.toLocaleString('en-IN'), false],
+    ['Total Annual Income', 'Rs. ' + d.totalIncome.toLocaleString('en-IN'), false],
+  ]);
+
+  let itrHtml = '<div class="itr-scroll"><table class="itr-table" style="margin:0"><thead><tr><th>Sl.</th><th>Assess. Year</th><th>Ack. No.</th><th>Total Income</th></tr></thead><tbody>';
+  d.itrRows.forEach((r, i) => {
+    itrHtml += '<tr><td style="text-align:center">' + (i+1) + '</td><td>' + (r.ay||'-') + '</td><td style="font-family:\'JetBrains Mono\',monospace;font-size:.77rem">' + (r.ack||'-') + '</td><td>' + (r.inc ? 'Rs. ' + parseInt(r.inc).toLocaleString('en-IN') : '-') + '</td></tr>';
+  });
+  if (!d.itrRows.length) itrHtml += '<tr><td colspan="4" style="text-align:center;color:var(--text4);padding:10px">No entries</td></tr>';
+  itrHtml += '</tbody></table></div>';
+  document.getElementById('rv-itr').innerHTML = itrHtml;
+
+  document.getElementById('rv-decl').innerHTML = rvItems([
+    ['Place', d.place, false], ['Date', d.date, false],
+    ['Signature', d.signature || '(physical signature required)', false],
+  ]);
+}
+
+function rvItems(pairs) {
+  return pairs.map(([l,v,mono]) =>
+    '<div class="review-item"><div class="review-label">' + l + '</div>' +
+    '<div class="review-val' + (mono ? ' mono' : '') + '">' + (v||'-') + '</div></div>'
+  ).join('');
+}
+
+// ============================================================
+// PREVIEW MODAL
+// ============================================================
+function openPreview() {
+  buildReview();
+  document.getElementById('preview-content').innerHTML = buildFormHTML(collectData());
+  document.getElementById('preview-modal').classList.add('open');
+}
+
+function closePreview() {
+  document.getElementById('preview-modal').classList.remove('open');
+}
+
+// ============================================================
+// FORM HTML BUILDER (used for preview + PDF)
+// ============================================================
+function buildFormHTML(d) {
+  const itrRows = d.itrRows.map((r, i) =>
+    '<tr><td style="text-align:center">' + (i+1) + '</td>' +
+    '<td>' + (r.ay||'') + '</td>' +
+    '<td style="font-family:monospace">' + (r.ack||'') + '</td>' +
+    '<td style="text-align:right">' + (r.inc ? parseInt(r.inc).toLocaleString('en-IN') : '') + '</td></tr>'
+  ).join('') || '<tr><td colspan="4" style="text-align:center;color:#999;padding:8px">No entries</td></tr>';
+
+  const partB = d.hasPartB ? `
+    <div style="margin-top:12px;border-top:2px solid #000;padding-top:8px">
+      <div style="background:#ccc;font-weight:bold;padding:3px 7px;font-size:9pt;border:1px solid #888;margin-bottom:5px">PART B -- For Use by Person Responsible for Paying</div>
+      <table style="width:100%;border-collapse:collapse;font-size:8pt">
+        <tr>
+          <td style="border:1px solid #aaa;padding:4px 6px;width:30%"><span style="font-size:7pt;color:#555;display:block">Bank / Deductor</span><strong>${d.bankName||''}</strong></td>
+          <td style="border:1px solid #aaa;padding:4px 6px"><span style="font-size:7pt;color:#555;display:block">Address</span><strong>${d.bankAddr||''}</strong></td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #aaa;padding:4px 6px"><span style="font-size:7pt;color:#555;display:block">TAN</span><strong style="font-family:monospace">${d.bankTAN||''}</strong></td>
+          <td style="border:1px solid #aaa;padding:4px 6px"><span style="font-size:7pt;color:#555;display:block">PAN</span><strong style="font-family:monospace">${d.bankPAN||''}</strong></td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #aaa;padding:4px 6px"><span style="font-size:7pt;color:#555;display:block">UIN</span><strong>${d.bankUIN||''}</strong></td>
+          <td style="border:1px solid #aaa;padding:4px 6px"><span style="font-size:7pt;color:#555;display:block">Date of Receipt</span><strong>${d.bankDate||''}</strong></td>
+        </tr>
+      </table>
+    </div>` : '';
+
+  return `<div style="font-family:Arial,sans-serif;font-size:9.5pt;color:#000;background:#fff;max-width:680px;margin:0 auto;padding:10px">
+    <div style="text-align:center;margin-bottom:6px">
+      <div style="font-size:7.5pt;color:#444">FORM NO. 121</div>
+      <div style="font-size:13pt;font-weight:bold;margin:2px 0">FORM 121</div>
+      <div style="font-size:7pt;color:#444">[See rule 29C(1A)]</div>
+      <div style="font-size:7.5pt;color:#333;margin-top:3px;line-height:1.5">Declaration under sub-section (1A) of section 197A of the Income-tax Act, 1961,<br>to be made by an individual or person (not being a company or a firm) claiming certain receipts without deduction of tax</div>
+    </div>
+    <div style="border:2px solid #000">
+      <div style="background:#bbb;font-weight:bold;padding:3px 7px;font-size:9pt;border-bottom:2px solid #000">PART A -- DECLARANT DETAILS</div>
+      <div style="display:flex;border-bottom:1px solid #aaa">
+        <div style="flex:2;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">1. Name of Declarant</span><strong>${d.name}</strong></div>
+        <div style="flex:1;padding:4px 7px"><span style="font-size:6.5pt;color:#555;display:block">2. PAN</span><strong style="font-family:monospace;letter-spacing:.06em">${d.pan}</strong></div>
+      </div>
+      <div style="display:flex;border-bottom:1px solid #aaa">
+        <div style="flex:2;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">3. Address</span><strong style="font-size:8pt">${d.addr}</strong></div>
+        <div style="flex:1;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">4. Status</span><strong>${d.status}</strong></div>
+        <div style="flex:1;padding:4px 7px"><span style="font-size:6.5pt;color:#555;display:block">5. Residential Status</span><strong>${d.resStatus}</strong></div>
+      </div>
+      <div style="display:flex;border-bottom:1px solid #aaa">
+        <div style="flex:1;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">6. Tax Year</span><strong>${d.taxYear}</strong></div>
+        <div style="flex:1;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">7. Age 60+?</span><strong>${d.senior?'Yes':'No'}</strong></div>
+        <div style="flex:1;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">8. Email</span><strong style="font-size:7.5pt">${d.email}</strong></div>
+        <div style="flex:1;padding:4px 7px"><span style="font-size:6.5pt;color:#555;display:block">9. Mobile</span><strong>${d.mobile}</strong></div>
+      </div>
+      <div style="background:#ddd;font-weight:bold;padding:2px 7px;font-size:8pt;border-bottom:1px solid #aaa;border-top:1px solid #aaa">Details of Income</div>
+      <div style="display:flex;border-bottom:1px solid #aaa">
+        <div style="flex:2;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">10. Nature of Income</span><strong>${d.nature}</strong></div>
+        <div style="flex:1;padding:4px 7px"><span style="font-size:6.5pt;color:#555;display:block">11. Estimated Income (Rs.)</span><strong>Rs. ${d.estIncome.toLocaleString('en-IN')}</strong></div>
+      </div>
+      <div style="display:flex;border-bottom:1px solid #aaa">
+        <div style="flex:1;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">12. No. of Prev Forms</span><strong>${d.prevCount}</strong></div>
+        <div style="flex:1;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">13. Agg. (Prev.) Rs.</span><strong>Rs. ${d.prevAgg.toLocaleString('en-IN')}</strong></div>
+        <div style="flex:1;padding:4px 7px;border-right:1px solid #aaa"><span style="font-size:6.5pt;color:#555;display:block">14. Total Agg. Rs.</span><strong>Rs. ${d.aggregate.toLocaleString('en-IN')}</strong></div>
+        <div style="flex:1;padding:4px 7px"><span style="font-size:6.5pt;color:#555;display:block">15. Est. Total Income Rs.</span><strong>Rs. ${d.totalIncome.toLocaleString('en-IN')}</strong></div>
+      </div>
+      <div style="background:#ddd;font-weight:bold;padding:2px 7px;font-size:8pt;border-bottom:1px solid #aaa;border-top:1px solid #aaa">ITR Details -- Last Two Assessment Years</div>
+      <div style="padding:5px 7px;border-bottom:1px solid #aaa">
+        <table style="width:100%;border-collapse:collapse;font-size:8pt">
+          <thead><tr>
+            <th style="border:1px solid #888;padding:3px 5px;background:#f0f0f0;width:28px">Sl.</th>
+            <th style="border:1px solid #888;padding:3px 5px;background:#f0f0f0">Assessment Year</th>
+            <th style="border:1px solid #888;padding:3px 5px;background:#f0f0f0">Acknowledgement Number</th>
+            <th style="border:1px solid #888;padding:3px 5px;background:#f0f0f0;text-align:right">Total Income (Rs.)</th>
+          </tr></thead>
+          <tbody>${itrRows}</tbody>
+        </table>
+      </div>
+      <div style="padding:5px 7px;border-bottom:1px solid #aaa">
+        <div style="font-weight:bold;font-size:8pt;margin-bottom:3px">DECLARATION</div>
+        <div style="font-size:7pt;line-height:1.7;font-style:italic">I/We <strong style="font-style:normal">${d.name}</strong>, do hereby declare that the particulars given above are true, correct and complete to the best of my/our knowledge and belief. I/We declare that the income referred to in this form is not includible in the total income of any other person under sections 60 to 64 of the Income-tax Act, 1961. I/We further declare that the tax on my/our estimated total income computed in accordance with the provisions of the Income-tax Act, 1961, will be nil during the previous year ending on 31st March, <strong style="font-style:normal">${d.endYear}</strong>.</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;padding:7px 10px">
+        <div><span style="font-size:6.5pt;color:#555;display:block">Place</span><strong>${d.place}</strong></div>
+        <div><span style="font-size:6.5pt;color:#555;display:block">Date</span><strong>${d.date}</strong></div>
+        <div style="text-align:center;min-width:120px">
+          <div style="border-top:1.5px solid #000;padding-top:3px;font-size:7pt">Signature / Thumb Impression<br>of the Declarant</div>
+          ${d.signature ? '<div style="font-size:7.5pt;font-weight:bold;margin-top:2px">' + d.signature + '</div>' : ''}
+        </div>
+      </div>
+    </div>
+    ${partB}
+    <div style="text-align:center;margin-top:8px;font-size:6pt;color:#888;border-top:1px dashed #ccc;padding-top:5px">Generated by Form 121 Generator -- Not an official government document. Users are responsible for correctness. Verify with Income Tax Department guidelines.</div>
+  </div>`;
+}
+
+// ============================================================
+// PDF DOWNLOAD (html2pdf.js -- off-screen render)
+// ============================================================
+function downloadPDF() {
+  if (typeof html2pdf === 'undefined') {
+    toast('PDF library not loaded. Check your internet connection.', 'error');
+    return;
+  }
+  toast('Generating PDF, please wait...');
+  const d = collectData();
+  const area = document.getElementById('pdf-render-area');
+  area.innerHTML = buildFormHTML(d);
+
+  const fname = 'Form_121_' + (d.name.replace(/\s+/g, '_') || 'Declaration') + '_' + (d.taxYear || 'AY') + '.pdf';
+
+  const opt = {
+    margin:      [8, 10, 8, 10],
+    filename:    fname,
+    image:       { type: 'jpeg', quality: 0.97 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
+  };
+
+  html2pdf().set(opt).from(area).save().then(function() {
+    area.innerHTML = '';
+    toast('PDF downloaded successfully!', 'success');
+  }).catch(function(err) {
+    area.innerHTML = '';
+    console.error('PDF error:', err);
+    toast('PDF generation failed. Please try again.', 'error');
+  });
+}
+
+// ============================================================
+// DRAFT -- localStorage
+// ============================================================
+function saveDraft() {
+  const ids = [
+    'f-name','f-pan','f-status','f-res','f-taxyear',
+    'f-email','f-mobile','f-ccode',
+    'f-flat','f-street','f-area','f-dist','f-state','f-pin','f-country',
+    'f-nature','f-estincome','f-prevcount','f-prevagg','f-totalincome',
+    'f-place','f-signature',
+    'f-bname','f-baddr','f-btan','f-bpan','f-buin','f-bdate'
+  ];
+  const draft = { senior: SENIOR, itrRows: getITRRows() };
+  ids.forEach(id => { const el = document.getElementById(id); if (el) draft[id] = el.value; });
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(draft)); } catch(e) {}
+}
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    Object.keys(d).forEach(k => {
+      if (k === 'senior' || k === 'itrRows') return;
+      const el = document.getElementById(k);
+      if (el) el.value = d[k];
+    });
+    if (d.senior) setAge(true);
+    if (d.itrRows && d.itrRows.length) {
+      const tbody = document.getElementById('itr-body');
+      tbody.innerHTML = '';
+      ITR_ROWS = 0;
+      d.itrRows.forEach((r, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td style="text-align:center;color:var(--text4);font-size:.74rem">' + (i+1) + '</td>' +
+          '<td><input type="text" class="itr-ay" value="' + (r.ay||'') + '"/></td>' +
+          '<td><input type="text" class="itr-ack" maxlength="15" value="' + (r.ack||'') + '"/></td>' +
+          '<td><input type="number" class="itr-inc" min="0" value="' + (r.inc||'') + '"/></td>' +
+          '<td><button class="btn-row-del" onclick="delITRRow(this)"><svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg></button></td>';
+        tbody.appendChild(tr);
+        ITR_ROWS++;
+      });
+      if (ITR_ROWS >= 2) document.getElementById('btn-add-itr').style.opacity = '.4';
+    }
+    calcAgg();
+    updateDeclYear();
+    syncDeclName();
+  } catch(e) {}
+}
+
+setInterval(saveDraft, 30000);
+
+// ============================================================
+// AUTOFILL DEMO
+// ============================================================
+function autofillDemo() {
+  const vals = {
+    'f-name':'ARJUN KUMAR NAIR','f-pan':'ABCPN1234F',
+    'f-status':'Individual','f-res':'Resident','f-taxyear':'2026-27',
+    'f-email':'arjun.nair@example.com','f-mobile':'9876543210',
+    'f-flat':'Flat 3A, Sunrise Apartments','f-street':'MG Road',
+    'f-area':'Ernakulam South','f-dist':'Ernakulam',
+    'f-pin':'682001','f-country':'India',
+    'f-nature':'Interest from bank deposits',
+    'f-estincome':'48000','f-prevcount':'1','f-prevagg':'22000',
+    'f-totalincome':'210000','f-place':'Thiruvananthapuram',
+    'f-signature':'ARJUN KUMAR NAIR',
+  };
+  Object.entries(vals).forEach(([id, v]) => {
+    const el = document.getElementById(id); if (el) el.value = v;
+  });
+  document.getElementById('f-state').value = 'Kerala';
+  setAge(false);
+  calcAgg();
+  updateDeclYear();
+  syncDeclName();
+  const rows = document.querySelectorAll('#itr-body tr');
+  if (rows[0]) {
+    rows[0].querySelector('.itr-ay').value  = '2025-26';
+    rows[0].querySelector('.itr-ack').value = '123456789012345';
+    rows[0].querySelector('.itr-inc').value = '195000';
+  }
+  toast('Demo data filled. Review and update as needed.', 'success');
+}
+
+// ============================================================
+// RESET
+// ============================================================
+function confirmReset() {
+  if (!confirm('Reset all form data? This cannot be undone.')) return;
+  try { localStorage.removeItem(DRAFT_KEY); } catch(e) {}
+  location.reload();
+}
+
+// ============================================================
+// LANGUAGE
+// ============================================================
+function setLang(l) {
+  const ml = l === 'ml';
+  document.querySelectorAll('.en').forEach(el => el.classList.toggle('hidden', ml));
+  document.querySelectorAll('.ml').forEach(el => el.classList.toggle('hidden', !ml));
+  document.getElementById('lang-en').classList.toggle('active', !ml);
+  document.getElementById('lang-ml').classList.toggle('active', ml);
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function toast(msg, type) {
+  type = type || '';
+  const icons = {
+    success: '<svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>',
+    error:   '<svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>',
+    warn:    '<svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>',
+    '':      '<svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>',
+  };
+  const stack = document.getElementById('toast-stack');
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = '<span class="toast-icon">' + (icons[type]||icons['']) + '</span><span class="toast-msg">' + msg + '</span>';
+  stack.appendChild(t);
+  setTimeout(function() {
+    t.style.transition = 'opacity .3s';
+    t.style.opacity = '0';
+    setTimeout(function() { t.remove(); }, 300);
+  }, 4000);
+}
+</script>
+
+</body>
+</html>
